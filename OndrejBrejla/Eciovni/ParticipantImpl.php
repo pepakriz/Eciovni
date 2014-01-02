@@ -52,6 +52,9 @@ class ParticipantImpl extends Object implements Participant {
     /** @var string */
     private $order = NULL;
 
+    /** @var array */
+    private $contacts = array();
+
     /**
      * Initializes the Participant.
      *
@@ -71,6 +74,7 @@ class ParticipantImpl extends Object implements Participant {
         $this->registration = $participantBuilder->getRegistration();
         $this->vatPayer = $participantBuilder->getVatPayer();
         $this->order = $participantBuilder->getOrder();
+        $this->contacts = $participantBuilder->getContacts();
     }
 
     /**
@@ -194,4 +198,14 @@ class ParticipantImpl extends Object implements Participant {
     public function getOrder() {
         return $this->order;
     }
+
+    /**
+     * Return array of contacts.
+     *
+     * @return array
+     */
+    public function getContacts() {
+        return $this->contacts;
+    }
+
 }

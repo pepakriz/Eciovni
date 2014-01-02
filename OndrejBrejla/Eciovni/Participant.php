@@ -109,4 +109,11 @@ interface Participant {
      */
     public function getOrder();
 
+    /**
+     * Returns list of contacts.
+     *
+     * @return array
+     */
+    public function getContacts();
+
 }

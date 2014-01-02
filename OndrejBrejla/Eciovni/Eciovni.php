@@ -175,6 +175,7 @@ class Eciovni extends Control {
         $template->supplierRegistration = $supplier->getRegistration();
         $template->vatPayer = $supplier->getVatPayer();
         $template->supplierOrder = $supplier->getOrder();
+        $template->contacts = $supplier->getContacts();
     }
 
     /**

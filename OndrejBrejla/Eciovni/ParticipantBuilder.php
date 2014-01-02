@@ -52,6 +52,9 @@ class ParticipantBuilder extends Object {
     /** @var string */
     private $order = NULL;
 
+    /** @var array */
+    private $contacts = array();
+
     /**
      * Initializes the Participant builder.
      *
@@ -159,6 +162,18 @@ class ParticipantBuilder extends Object {
      */
     public function setOrder($order) {
         $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * Sets the contact.
+     *
+     * @param $key
+     * @param $value
+     * @return ParticipantBuilder
+     */
+    public function addContact($key, $value) {
+        $this->contacts[$key] = $value;
         return $this;
     }
 
@@ -282,6 +297,15 @@ class ParticipantBuilder extends Object {
      */
     public function getOrder() {
         return $this->order;
+    }
+
+    /**
+     * Return array of contacts.
+     *
+     * @return array
+     */
+    public function getContacts() {
+        return $this->contacts;
     }
     
     /**

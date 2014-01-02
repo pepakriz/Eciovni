@@ -48,6 +48,7 @@
  * @param    double                $finalValue
  * @param    double                $inoviceRound
  * @param    double                $finalValueRound
+ * @param    array                 $contacts
  *}
 <html>
 <head>
@@ -101,6 +102,12 @@
                         <td>Číslo účtu:</td>
                         <td style="text-align: center; border: 3px solid #000000; font-weight: bold" width="220">{$supplierAccountNumber}</td>
                     </tr>
+                    {foreach $contacts as $key => $val}
+                    <tr>
+                        <td>{_$key}:</td>
+                        <td>{$val}</td>
+                    </tr>
+                    {/foreach}
                 </table>
 
                 <table style="width: 100%;">
