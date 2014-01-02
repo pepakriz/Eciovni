@@ -3,6 +3,7 @@
 namespace OndrejBrejla\Eciovni;
 
 use Nette\Application\UI\Control;
+use Nette\Localization\ITranslator;
 use Nette\Templating\IFileTemplate;
 use mPDF;
 
@@ -32,6 +33,22 @@ class Eciovni extends Control {
         }
 
         $this->templatePath = __DIR__ . '/Eciovni.latte';
+    }
+
+    /**
+     * @param ITranslator|NULL $translator
+     */
+    public function setTranslator(ITranslator $translator = NULL)
+    {
+        $this->template->setTranslator($translator);
+    }
+
+    /**
+     * @return ITranslator|NULL
+     */
+    public function getTranslator()
+    {
+        return $this->template->translator;
     }
 
     /**
