@@ -70,11 +70,11 @@
     {if $logo != null}<img src="{$basePath}/images/{$logo}" style="width:220px;height:60px;float:left;margin-bottom:10px" alt="Logo" />{/if}
     <div style="text-align: right; border-bottom: 2px solid #000000; color: #1A5DAC; font-weight: bold; font-size: 20px;clear:both;">{$title} {$id}</div>
 
-    <table>
+    <table style="width: 100%; margin-bottom: 20px;">
         <tr>
-            <td width="40%">
-                <span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">Dodavatel:</span>
-                <table style="font-weight: bold; margin-bottom: 15px;">
+            <td width="50%">
+                <span style="color: #1A5DAC; font-weight: bold; font-size: 13px;">Dodavatel:</span>
+                <table style="width: 100%; font-weight: bold; margin-bottom: 15px;">
                     <tr>
                         <td>{$supplierName}</td>
                     </tr>
@@ -86,21 +86,18 @@
                     </tr>
                 </table>
 
-                <table style="color: #1A5DAC; margin-bottom: 15px;">
+                <table style="width: 100%; margin-bottom: 15px;">
                     <tr>
-                        <td>IČ:</td>
-                        <td>{$supplierIn}</td>
+                        <td style="width: 40%;">IČ:</td>
+                        <td style="width: 60%;">{$supplierIn}</td>
                     </tr>
-                    <tr>
+                    <tr n:if="$supplierTin">
                         <td>DIČ:</td>
                         <td>{$supplierTin}</td>
                     </tr>
-                </table>
-
-                <table style="width: 100%; margin-bottom: 15px;">
                     <tr>
-                        <td>Číslo účtu:</td>
-                        <td style="text-align: center; border: 3px solid #000000; font-weight: bold" width="220">{$supplierAccountNumber}</td>
+                        <td></td>
+                        <td>{if $vatPayer}plátce DPH{else}neplátce DPH{/if}</td>
                     </tr>
                     {foreach $contacts as $key => $val}
                     <tr>
@@ -110,70 +107,62 @@
                     {/foreach}
                 </table>
 
-                <table style="width: 100%;">
+                <span style="color: #1A5DAC; font-weight: bold; font-size: 13px;">Platební podmínky:</span>
+
+                <table style="width: 100%; font-size: 13px;">
                     <tr>
-                        <td>Banka:</td>
-                        <td style="text-align: center;">{$supplierBankName}</td>
+                        <td style="width: 40%;">Forma úhrady:</td>
+                        <td style="width: 60%;">{_$supplierPayment}</td>
                     </tr>
                     <tr>
-                        <td>Forma úhrady:</td>
-                        <td style="text-align: center;">{$supplierPayment}</td>
+                        <td style="width: 40%;">Banka:</td>
+                        <td style="width: 60%;">{$supplierBankName}</td>
                     </tr>
                     <tr>
-                        <td>Datum vystavení:</td>
-                        <td style="text-align: center;">{$dateOfIssuance}</td>
+                        <td>Číslo účtu:</td>
+                        <td style="text-align: center; border: 3px solid #000000; font-weight: bold; width: 100%;">{$supplierAccountNumber}</td>
                     </tr>
-                    <tr>
-                        <td>Datum splatnosti:</td>
-                        <td style="text-align: center;">{$expirationDate}</td>
+                    <tr n:if="$variableSymbol">
+                        <td>Variabilní symbol:</td>
+                        <td>{$variableSymbol}</td>
                     </tr>
-                    {if $vatPayer}
-                    <tr>
-                        <td>Datum uskutečnění zdanitelného plnění:</td>
-                        <td style="text-align: center;">{$dateOfVatRevenueRecognition}</td>
+                    <tr n:if="$specificSymbol">
+                        <td>Specifický symbol:</td>
+                        <td>{$specificSymbol}</td>
                     </tr>
-                    {/if}
-                </table>
-            </td>
-            <td width="60%" align="right">
-                <table style="margin-bottom: 15px;">
-                    <tr>
-                        <td style="text-align: right;">Variabilní symbol:</td>
-                        <td style="text-align: center;">{$variableSymbol}</td>
+                    <tr n:if="$constantSymbol">
+                        <td>Konstantní symbol:</td>
+                        <td>{$constantSymbol}</td>
                     </tr>
-                    <tr>
-                        <td style="text-align: right;">Specifický symbol:</td>
-                        <td style="text-align: center;">{$specificSymbol}</td>
-                    </tr>
-                    <tr>
-                        <td style="text-align: right;">Konstantní symbol:</td>
-                        <td style="text-align: center;">{$constantSymbol}</td>
-                    </tr>
-                    <tr>
+                    <tr n:if="$supplierOrder">
                         <td style="text-align: right;">Objednávka číslo:</td>
                         <td style="text-align: center;">{$supplierOrder}</td>
                     </tr>
                 </table>
+            </td>
+            <td width="50%" align="right">
 
-                <table style="border: 3px solid #000000;">
+                <table width="100%" style="margin-bottom: 25px; font-size: 13px;">
                     <tr>
-                        <td width="350">
-                            <span style="color: #1A5DAC; font-weight: bold; font-size: 12px;">Odběratel:</span>
-                            <table style="margin-bottom: 15px;">
-                                <tr>
-                                    <td>IČ:</td>
-                                    <td>{$customerIn == 0 ? '' : $customerIn}</td>
-                                </tr>
-                                <tr>
-                                    <td>DIČ:</td>
-                                    <td>{$customerTin}</td>
-                                </tr>
-                                <tr>
-                                    <td>Vaše č. obj.:</td>
-                                    <td>{$customerOrder}</td>
-                                </tr>
-                            </table>
+                        <td style="width: 60%;">Datum vystavení:</td>
+                        <td style="width: 40%;">{$dateOfIssuance}</td>
+                    </tr>
+                    <tr>
+                        <td style="font-weight: bold;">Datum splatnosti:</td>
+                        <td style="font-weight: bold;">{$expirationDate}</td>
+                    </tr>
+                    {if $vatPayer}
+                        <tr>
+                            <td>Datum uskutečnění plnění:</td>
+                            <td>{$dateOfVatRevenueRecognition}</td>
+                        </tr>
+                    {/if}
+                </table>
 
+                <table style="width: 300px; border: 3px solid #000000;">
+                    <tr>
+                        <td width="100%">
+                            <span style="color: #1A5DAC; font-weight: bold; font-size: 13px;">Odběratel:</span>
                             <table style="font-weight: bold; margin-bottom: 15px;">
                                 <tr>
                                     <td>{$customerName}</td>
@@ -185,13 +174,32 @@
                                     <td>{$customerCity}, {$customerZip}</td>
                                 </tr>
                             </table>
+
+                            <table style="margin-bottom: 15px;">
+                                <tr n:if="$customerIn">
+                                    <td>IČ:</td>
+                                    <td>{$customerIn == 0 ? '' : $customerIn}</td>
+                                </tr>
+                                <tr n:if="$customerTin">
+                                    <td>DIČ:</td>
+                                    <td>{$customerTin}</td>
+                                </tr>
+                                <tr n:if="$customerOrder">
+                                    <td>Vaše č. obj.:</td>
+                                    <td>{$customerOrder}</td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                 </table>
+
             </td>
         </tr>
     </table>
+
+    <span style="color: #1A5DAC; font-weight: bold; font-size: 13px;">Fakturujeme vám:</span>
     <div style="border: 1px solid #BEC8CE; clear: both; margin-bottom: 15px;">
+
         <table style="width: 100%;">
             <tr>
                 <td><strong>Položka</strong></td>
@@ -252,7 +260,7 @@
         {/if}
     </table>
     </div>  
-    {if $vatPayer}
+    {if $vatPayer && count($finalSummary)}
     <table style="width:50%;border-top:1px solid #000;border-left:1px solid #000;border-collapse:collapse;">
         <tr>
             <td style="border-right:1px solid #000;border-bottom:1px solid #000;">Rekapitulace DPH v Kč</td>
@@ -271,7 +279,10 @@
     </table>
     {/if}
     <div style="text-align: right; padding-right: 30px;margin-top:10px;">
-        {if $stamp != null}<img src="{$basePath}/images/{$stamp}" style="width:180px;" alt="Vystavil, razítko, podpis:" />{/if}
+        {if $stamp != null}
+            {var $stamp = \Nette\Image::fromFile($stamp->getFilePath())}
+            <img src="{$stamp|dataStream}" style="width:180px;" alt="Vystavil, razítko, podpis:" />
+        {/if}
     </div>
     <div style="float:right;text-align:center;width:150px;border-top:2px dashed #000000;font-weight: bold;margin-top:5px;margin-right:50px;">Razítko a podpis</div>
     <div style="float:left;margin-top:0px;">Registrace:<br />{$supplierRegistration}</div>
